@@ -82,20 +82,79 @@ function validateNumber(number) {
 }
 
 function validateRadio(radio) {
-    // todo
 
-    return true;
+    const valid = (radio > 0);
+    const input = document.querySelector("input[name='favouriteNumber']");
+    if (valid) {
+
+        input.className = "";
+
+        const nameMessage = document.getElementById("radio-input-message");
+        if (nameMessage) {
+            nameMessage.parentElement.removeChild(nameMessage);
+        }
+    } else {
+
+        input.className = "invalid";
+        if (!document.getElementById("radio-input-message")) {
+            const small = document.createElement("small");
+            small.id = "radio-input-message";
+            small.className = "invalid";
+            small.innerText = "Zaznacz wymagane pole: 1,2 lub 3";
+            input.parentElement.appendChild(small);
+        }
+    }
+    return valid
 }
 
 function validatePassword(password) {
-    // regex do hasła: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/
-    // todo
 
-    return true;
+    const valid = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[a-zA-Z\d]{8,}$/.test(password);
+
+    const input = document.querySelector("input[name='password']");
+
+    if (valid) {
+        input.className = "";
+
+        const nameMessage = document.getElementById("password-input-message");
+        if (nameMessage) {
+            nameMessage.parentElement.removeChild(nameMessage);
+        }
+    } else {
+        input.className = "invalid";
+        if (!document.getElementById("password-input-message")) {
+            const small = document.createElement("small");
+            small.id = "password-input-message";
+            small.className = "invalid";
+            small.innerText = "Hasło musi zawierać conajmniej 8 znaków, cyfrę, dużą i małą literę";
+            input.parentElement.appendChild(small);
+        }
+    }
+    return valid;
 }
 
 function validateRepeatedPassword(password, repeatedPassword) {
-    // todo
+    const valid = password === repeatedPassword;
 
-    return true;
+    const input = document.querySelector("input[name='password2']");
+
+    if (valid) {
+        input.className = "";
+
+        const nameMessage = document.getElementById("password2-input-message");
+        if (nameMessage) {
+            nameMessage.parentElement.removeChild(nameMessage);
+        }
+    } else {
+        input.className = "invalid";
+
+        if (!document.getElementById("password2-input-message")) {
+            const small = document.createElement("small");
+            small.id = "password2-input-message";
+            small.className = "invalid";
+            small.innerText = "Hasło nie jest takie samo";
+            input.parentElement.appendChild(small);
+        }
+    }
+    return valid;
 }
